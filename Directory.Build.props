@@ -1,0 +1,12 @@
+<Project ToolsVersion="15.0">
+	<PropertyGroup>
+		<TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DebugType>portable</DebugType>
+		<DebugSymbols>True</DebugSymbols>
+		<NoWarn>Uno0001;CS1998;CA1416</NoWarn>
+		<SynthesizeLinkMetadata>true</SynthesizeLinkMetadata> 
+	</PropertyGroup>
+</Project>

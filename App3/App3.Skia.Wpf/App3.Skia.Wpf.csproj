@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+	<LangVersion>10</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="SkiaSharp.Views.WPF" Version="2.88.0" />
+    <PackageReference Include="Uno.Extensions.Logging.WinUI" Version="2.0.0" />
+    <PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" Version="2.0.0" />
+    <PackageReference Include="Uno.Extensions.Navigation.WinUI" Version="2.0.0" />
+    <PackageReference Include="Uno.Extensions.Reactive.WinUI" Version="2.0.0" />
+    <PackageReference Include="Uno.Toolkit.WinUI" Version="2.1.0" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.1.0" />
+    <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="4.3.8" />
+    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.3.8" />
+	<PackageReference Include="Uno.Extensions.Hosting.WinUI" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="..\App3.Shared\**\*.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Shared.csproj" />
+  </ItemGroup>
+  <Import Project="..\App3.Shared\App3.Shared.projitems" Label="Shared" />
+</Project>

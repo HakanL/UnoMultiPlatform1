@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
+		<OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DefineConstants>$(DefineConstants)TRACE;IOT</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DefineConstants>$(DefineConstants)TRACE;IOT</DefineConstants>
+	</PropertyGroup>
+	<ItemGroup Condition="exists('..\App3.UWP')">
+		<EmbeddedResource Include="..\App3.UWP\Package.appxmanifest" LogicalName="Package.appxmanifest" />
+		<Content Include="..\App3.UWP\Assets\StoreLogo.png" Link="Assets\StoreLogo.png" />
+		<Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
+	</ItemGroup>
+	<ItemGroup>
+		<UpToDateCheckInput Include="..\App3.Shared\**\*.xaml" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Iot.Device.Bindings" Version="2.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+		<PackageReference Include="Uno.Extensions.Hosting.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Extensions.Logging.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Extensions.Navigation.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Extensions.Reactive.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Toolkit.WinUI" Version="2.1.0" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.1.0" />
+		<PackageReference Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="4.3.8" />
+		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Shared\Shared.csproj" />
+	</ItemGroup>
+	<Import Project="..\App3.Shared\App3.Shared.projitems" Label="Shared" />
+</Project>
