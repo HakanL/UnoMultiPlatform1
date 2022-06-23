@@ -8,15 +8,16 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ResourceDictionary Source="Styles/_Styles.xaml" />
 
-                <!-- Load Uno.Material resources -->
+                <!-- Load Uno.Material resources --><!--
                 <MaterialColors xmlns="using:Uno.Material" />
                 <MaterialFonts xmlns="using:Uno.Material" />
                 <MaterialResources xmlns="using:Uno.Material" />
 
-                <!-- Load Uno.Toolkit.UI resources -->
+                --><!-- Load Uno.Toolkit.UI resources --><!--
                 <ToolkitResources xmlns="using:Uno.Toolkit.UI" />
-                <MaterialToolkitResources xmlns="using:Uno.Toolkit.UI.Material" />
+                <MaterialToolkitResources xmlns="using:Uno.Toolkit.UI.Material" />-->
 
                 <!-- Load custom application resources -->
                 <!-- ... -->

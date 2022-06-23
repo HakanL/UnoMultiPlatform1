@@ -13,7 +13,27 @@
   <ItemGroup>
     <_Globbed_Compile Remove="App.xaml.host.cs" />
     <_Globbed_Compile Remove="AppTheme.cs" />
+    <_Globbed_Compile Remove="Converters\BoolToObjectConverter.cs" />
+    <_Globbed_Compile Remove="Converters\BoolToVisibilityConverter.cs" />
+    <_Globbed_Compile Remove="Converters\ConverterTools.cs" />
     <_Globbed_Compile Remove="GlobalUsings.cs" />
     <_Globbed_Compile Remove="ReactiveClasses.cs" />
+    <_Globbed_Compile Remove="ViewModels\DashboardViewModel.cs" />
+    <_Globbed_Compile Remove="ViewModels\LoginViewModel.cs" />
+    <_Globbed_Compile Remove="ViewModels\MyFilesViewModel.cs" />
+    <_Globbed_Compile Remove="Views\Dashboard.xaml.cs" />
+    <_Globbed_Compile Remove="Views\LoginPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\MyFilesPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\RecentFilesPages.xaml.cs" />
+    <_Globbed_Compile Remove="Views\RecycleBinPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\SharedFilesPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <_Globbled_Page Remove="Views\Dashboard.xaml" />
+    <_Globbled_Page Remove="Views\LoginPage.xaml" />
+    <_Globbled_Page Remove="Views\MyFilesPage.xaml" />
+    <_Globbled_Page Remove="Views\RecentFilesPages.xaml" />
+    <_Globbled_Page Remove="Views\RecycleBinPage.xaml" />
+    <_Globbled_Page Remove="Views\SharedFilesPage.xaml" />
   </ItemGroup>
 </Project>

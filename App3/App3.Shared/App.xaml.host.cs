@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Uno.Extensions.Configuration;
 using Uno.Extensions.Serialization;
+using App3.Services;
 //Not compatible with UWP - using Uno.Extensions.Navigation.Toolkit;
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
@@ -23,8 +24,10 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace App3
 {
-	public sealed partial class App : Application
+	public sealed partial class App
 	{
+		public IServiceProvider Container => _host.Services;
+
 		private readonly IHost _host = BuildAppHost();
 
 		private static IHost BuildAppHost()
@@ -68,6 +71,14 @@ namespace App3
 					.ConfigureServices(
 						(context, services) =>
 						{
+							//ConfigureLogging(services);
+							//services.UseAuthentication();
+
+							services.AddSingleton<INetworkConnectivityService, NetworkConnectivityService>();
+							services.AddTransient<INavigationService, NavigationService>();
+							services.AddTransient<IGraphFileService, GraphFileService>();
+							services.AddTransient<ICachedGraphFileService, CachedGraphFileService>();
+
 
 							//var section = context.Configuration.GetSection(nameof(Mock));
 							//var useMocks = bool.TryParse(section[nameof(Mock.IsEnabled)], out var isMocked) ? isMocked : false;
@@ -77,20 +88,20 @@ namespace App3
 #endif
 
 							services
-								.AddScoped<IAppTheme, AppTheme>();
+								.AddScoped<IAppTheme, AppTheme>()
 								//.AddEndpoints(context, useMocks: useMocks)
-								//.AddServices(useMocks: useMocks);
+								.AddServices();
 						})
 
 					// Enable navigation, including registering views and viewmodels
-					.UseNavigation(
-							RegisterRoutes,
-							createViewRegistry: sc => new ReactiveViewRegistry(sc, ReactiveViewModelMappings.ViewModelMappings))
-						.ConfigureServices(services =>
-						{
-							services
-								.AddSingleton<IRouteResolver, ReactiveRouteResolver>();
-						})
+					//.UseNavigation(
+					//		RegisterRoutes,
+					//		createViewRegistry: sc => new ReactiveViewRegistry(sc, ReactiveViewModelMappings.ViewModelMappings))
+					//	.ConfigureServices(services =>
+					//	{
+					//		services
+					//			.AddSingleton<IRouteResolver, ReactiveRouteResolver>();
+					//	})
 
 					// Add navigation support for toolkit controls such as TabBar and NavigationView
 					//Not working with UWP .UseToolkitNavigation()
@@ -99,86 +110,6 @@ namespace App3
 					//.UseLocalization()
 
 					.Build(enableUnoLogging: true);
-		}
-
-		private static void RegisterRoutes(IViewRegistry views, IRouteRegistry routes)
-		{
-			//LocalizableMessageDialogViewMap BuildDialogViewMap(string section, bool delayUserInput, int defaultButtonIndex, params (object Id, string labelKeyPath)[] buttons)
-			//{
-			//	return new LocalizableMessageDialogViewMap
-			//	(
-			//		Content: localizer => localizer[ResourceKey(ResourceKeys.DialogContent)],
-			//		Title: localizer => localizer[ResourceKey(ResourceKeys.DialogTitle)],
-			//		DelayUserInput: delayUserInput,
-			//		DefaultButtonIndex: defaultButtonIndex,
-			//		Buttons: buttons
-			//			.Select(x => new LocalizableDialogAction(LabelProvider: localizer => localizer[ResourceKey(x.labelKeyPath)], Id: x.Id))
-			//			.ToArray()
-			//	);
-			//	string ResourceKey(string keyPath)
-			//	{
-			//		// map absolute/relative path accordingly
-			//		return keyPath.StartsWith("./") ? keyPath.Substring(2) : $"Dialog_{section}_{keyPath}";
-			//	}
-			//}
-
-			//var deleteButton = (DialogResults.Affirmative, ResourceKeys.DeleteButton);
-			//var cancelButton = (DialogResults.Negative, ResourceKeys.CancelButton);
-			//var confirmDeleteListDialog = BuildDialogViewMap(Dialog.ConfirmDeleteList, true, 0, deleteButton, cancelButton);
-			//var confirmDeleteTaskDialog = BuildDialogViewMap(Dialog.ConfirmDeleteTask, true, 0, deleteButton, cancelButton);
-			//var confirmSignOutDialog = BuildDialogViewMap(Dialog.ConfirmSignOut, true, 0, (DialogResults.Affirmative, ResourceKeys.SignOutButton), cancelButton);
-
-			//views.Register(
-			//	// Dialogs and Flyouts
-			//	new ViewMap<AddTaskFlyout, AddTaskViewModel>(),
-			//	new ViewMap<AddListFlyout, AddListViewModel>(),
-			//	new ViewMap<ExpirationDateFlyout, ExpirationDateViewModel>(Data: new DataMap<PickedDate>()),
-			//	new ViewMap<RenameListFlyout, RenameListViewModel>(),
-
-			//	// Views
-			//	new ViewMap<HomePage, HomeViewModel>(),
-			//	new ViewMap<TaskSearchFlyout>(),
-			//	new ViewMap<SearchPage, SearchViewModel>(),
-			//	new ViewMap<SettingsFlyout, SettingsViewModel>(),
-			//	new ViewMap<ShellControl, ShellViewModel>(),
-			//	new ViewMap<WelcomePage, WelcomeViewModel>(),
-			//	new ViewMap<TaskListPage, TaskListViewModel>(Data: new DataMap<TaskList>()),
-			//	new ViewMap(
-			//		ViewSelector: () => (App.Current as App)?.Window?.Content?.ActualSize.X > (double)App.Current.Resources[ResourceKeys.WideMinWindowWidth] ? typeof(TaskControl) : typeof(TaskPage),
-			//		ViewModel: typeof(TaskViewModel), Data: new DataMap<ToDoTask>()),
-			//	confirmDeleteListDialog,
-			//	confirmDeleteTaskDialog,
-			//	confirmSignOutDialog
-			//);
-
-			routes.Register(
-				//new RouteMap("", View: views.FindByViewModel<ShellViewModel>(), Nested: new RouteMap[]
-				//{
-				//new("Welcome", View: views.FindByViewModel<WelcomeViewModel>()),
-				//new("Home", View: views.FindByViewModel<HomeViewModel>()),
-				//new("TaskList", View: views.FindByViewModel<TaskListViewModel>(), Nested: new[]
-				//{
-				//	new RouteMap("MultiTaskLists", IsDefault: true, Nested: new[]
-				//	{
-				//		new RouteMap("ToDo", IsDefault:true),
-				//		new RouteMap("Completed")
-				//	})
-				//}),
-				//new("Task", View: views.FindByViewModel<TaskViewModel>(), DependsOn:"TaskList"),
-				//new("TaskSearch", View: views.FindByView<TaskSearchFlyout>(), Nested: new RouteMap[]
-				//{
-				//	new("Search", View: views.FindByViewModel<SearchViewModel>(), IsDefault: true)
-				//}),
-				//new("Settings", View: views.FindByViewModel<SettingsViewModel>()),
-				//new("AddTask", View: views.FindByViewModel<AddTaskViewModel>()),
-				//new("AddList", View: views.FindByViewModel<AddListViewModel>()),
-				//new("ExpirationDate", View: views.FindByViewModel<ExpirationDateViewModel>()),
-				//new("RenameList", View: views.FindByViewModel<RenameListViewModel>()),
-				//new(Dialog.ConfirmDeleteList, confirmDeleteListDialog),
-				//new(Dialog.ConfirmDeleteTask, confirmDeleteTaskDialog),
-				//new(Dialog.ConfirmSignOut, confirmSignOutDialog)
-				//})
-			);
 		}
 	}
 }

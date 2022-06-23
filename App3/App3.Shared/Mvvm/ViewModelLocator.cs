@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
@@ -12,51 +10,47 @@ using Microsoft.UI.Xaml;
 
 namespace App3.Mvvm
 {
-    public static class ViewModelLocator
-    {
-        public static DependencyProperty AutoWireViewModelProperty = DependencyProperty.RegisterAttached("AutoWireViewModel", typeof(bool),
-            typeof(ViewModelLocator), new PropertyMetadata(false, AutoWireViewModelChanged));
+	public class ViewModelLocator
+	{
+		public static DependencyProperty AutoWireViewModelProperty = DependencyProperty.RegisterAttached("AutoWireViewModel", typeof(bool),
+			typeof(ViewModelLocator), new PropertyMetadata(false, AutoWireViewModelChanged));
 
-        public static bool GetAutoWireViewModel(UIElement element)
-        {
-            return (bool)element.GetValue(AutoWireViewModelProperty);
-        }
+		public static bool GetAutoWireViewModel(UIElement element) =>
+			(bool)element.GetValue(AutoWireViewModelProperty);
 
-        public static void SetAutoWireViewModel(UIElement element, bool value)
-        {
-            element.SetValue(AutoWireViewModelProperty, value);
-        }
+		public static void SetAutoWireViewModel(UIElement element, bool value) =>
+			element.SetValue(AutoWireViewModelProperty, value);
 
-        private static void AutoWireViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if ((bool)e.NewValue)
-                Bind(d);
-        }
+		static void AutoWireViewModelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			if ((bool)e.NewValue)
+				Bind(d);
+		}
 
-        private static void Bind(DependencyObject view)
-        {
-            if (view is FrameworkElement frameworkElement)
-            {
-                var viewModelType = FindViewModel(frameworkElement.GetType());
-                frameworkElement.DataContext = Activator.CreateInstance(viewModelType);
-            }                //TODO frameworkElement.DataContext = ActivatorUtilities.GetServiceOrCreateInstance(((App)App.Current).Container, viewModelType);
-        }
+		static void Bind(DependencyObject view)
+		{
+			if (view is FrameworkElement frameworkElement)
+			{
+				var viewModelType = FindViewModel(frameworkElement.GetType());
+				frameworkElement.DataContext = ActivatorUtilities.GetServiceOrCreateInstance(((App)App.Current).Container, viewModelType);
+			}
+		}
 
-        private static Type FindViewModel(Type viewType)
-        {
-            string viewName = string.Empty;
+		static Type FindViewModel(Type viewType)
+		{
+			string viewName = string.Empty;
 
-            if (viewType.FullName.EndsWith("Page"))
-            {
-                viewName = viewType.FullName
-                    .Replace("Page", string.Empty)
-                    .Replace("Views", "ViewModels");
-            }
+			if (viewType.FullName.EndsWith("Page") || viewType.FullName.StartsWith("App3.Views"))
+			{
+				viewName = viewType.FullName
+				.Replace("Page", string.Empty)
+				.Replace("Views", "ViewModels");
+			}
 
-            var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-            var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
+			var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+			var viewModelName = string.Format(CultureInfo.InvariantCulture, "{0}ViewModel, {1}", viewName, viewAssemblyName);
 
-            return Type.GetType(viewModelName);
-        }
-    }
+			return Type.GetType(viewModelName);
+		}
+	}
 }

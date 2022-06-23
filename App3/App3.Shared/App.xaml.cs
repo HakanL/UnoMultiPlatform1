@@ -1,4 +1,5 @@
 ﻿using System;
+using App3.Mvvm;
 using Microsoft.Extensions.Logging;
 #if WINDOWS_UWP
 using Windows.UI.Xaml;
@@ -20,6 +21,7 @@ namespace App3
     public sealed partial class App : Application
     {
         private Window _window;
+        public Window Window => _window;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -87,7 +89,7 @@ namespace App3
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), args.Arguments);
+                    rootFrame.Navigate(typeof(Views.LoginPage), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();
@@ -144,7 +146,7 @@ namespace App3
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), args.Arguments);
+                    rootFrame.Navigate(typeof(Views.LoginPage), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();
