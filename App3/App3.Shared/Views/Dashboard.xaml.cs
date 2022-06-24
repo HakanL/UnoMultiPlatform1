@@ -13,40 +13,45 @@ using Uno.Extensions;
 
 namespace App3.Views
 {
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
-	public sealed partial class Dashboard : Page
-	{
-		public Dashboard()
-		{
-			this.InitializeComponent();
-			//contentFrame.Content = new MyFilesPage();
-			contentFrame.Navigate(typeof(MyFilesPage), null, new SuppressNavigationTransitionInfo());
-		}
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class Dashboard : Page
+    {
+        public Dashboard()
+        {
+            this.InitializeComponent();
+            //contentFrame.Content = new MyFilesPage();
+            contentFrame.Navigate(typeof(HomePage), null, new SuppressNavigationTransitionInfo());
+        }
 
-		async void MenuItemSelected(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-		{
-			//    var navOptions = new FrameNavigationOptions();
-			//    navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
+        async void MenuItemSelected(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        {
+            var navOptions = new FrameNavigationOptions();
+            navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
 
-			//    Type pageType = default;
-			//    if (myFiles == args.InvokedItemContainer)
-			//        pageType = typeof(MyFilesPage);
-			//    else if (recentFiles == args.InvokedItemContainer)
-			//        pageType = typeof(RecentFilesPages);
-			//    else if (sharedFiles == args.InvokedItemContainer)
-			//        pageType = typeof(SharedFilesPage);
-			//    else if (recycleBin == args.InvokedItemContainer)
-			//        pageType = typeof(RecycleBinPage);
+            Type pageType = default;
+            if (args.InvokedItemContainer == home)
+                pageType = typeof(HomePage);
+            if (args.InvokedItemContainer == myFiles)
+                pageType = typeof(MyFilesPage);
+            if (args.InvokedItemContainer == networkAdapters)
+                pageType = typeof(NetworkPage);
+            //    else if (recentFiles == args.InvokedItemContainer)
+            //        pageType = typeof(RecentFilesPages);
+            //    else if (sharedFiles == args.InvokedItemContainer)
+            //        pageType = typeof(SharedFilesPage);
+            //    else if (recycleBin == args.InvokedItemContainer)
+            //        pageType = typeof(RecycleBinPage);
 
-			//    contentFrame.NavigateToType(pageType, null, navOptions);
+            if (pageType != default)
+                contentFrame.Navigate(pageType, null/*, navOptions*/);
 
-			if (signOut == args.InvokedItemContainer)
-			{
-				var nav = (INavigationService)((App)App.Current).Container.GetService(typeof(INavigationService));
-				await nav.SignOutAsync();
-			}
-		}
-	}
+            if (signOut == args.InvokedItemContainer)
+            {
+                var nav = (INavigationService)((App)App.Current).Container.GetService(typeof(INavigationService));
+                await nav.SignOutAsync();
+            }
+        }
+    }
 }

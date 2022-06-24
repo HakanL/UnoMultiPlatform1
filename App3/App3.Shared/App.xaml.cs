@@ -44,8 +44,10 @@ namespace App3
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(LaunchActivatedEventArgs args)
         {
+            await Data.ControlInfoDataSource.Instance.GetGroupsAsync();
+
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -89,7 +91,7 @@ namespace App3
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(Views.LoginPage), args.Arguments);
+                    rootFrame.Navigate(typeof(Views.Dashboard), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();
@@ -101,8 +103,9 @@ namespace App3
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="args">Details about the launch request and process.</param>
-        protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+        protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
+            await Data.ControlInfoDataSource.Instance.GetGroupsAsync();
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -146,7 +149,7 @@ namespace App3
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(Views.LoginPage), args.Arguments);
+                    rootFrame.Navigate(typeof(Views.Dashboard), args.Arguments);
                 }
                 // Ensure the current window is active
                 _window.Activate();

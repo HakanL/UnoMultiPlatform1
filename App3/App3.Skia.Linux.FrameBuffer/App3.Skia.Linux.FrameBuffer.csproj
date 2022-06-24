@@ -27,6 +27,7 @@
 		<PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" Version="2.0.0" />
 		<PackageReference Include="Uno.Extensions.Navigation.WinUI" Version="2.0.0" />
 		<PackageReference Include="Uno.Extensions.Reactive.WinUI" Version="2.0.0" />
+		<PackageReference Include="Uno.Material.WinUI" Version="2.1.0" />
 		<PackageReference Include="Uno.Toolkit.WinUI" Version="2.1.0" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.1.0" />
 		<PackageReference Include="Uno.WinUI.Skia.Linux.FrameBuffer" Version="4.3.8" />

@@ -22,17 +22,32 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AppTheme.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDataGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\HeaderControl.xaml.cs">
       <DependentUpon>HeaderControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DoubleToThicknessConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\IsEmptyToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NullableBooleanToBooleanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\NullToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDataItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDocLink.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\OneDriveItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\Setting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemsPageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemTemplates.xaml.cs">
+      <DependentUpon>ItemTemplates.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Models\GroupInfoList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Address.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\NetworkAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mvvm\IInitialize.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mvvm\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ReactiveClasses.cs" />
@@ -41,6 +56,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\GraphFileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NavigationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NetworkConnectivityService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NetworkViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DashboardViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
@@ -48,11 +64,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\Dashboard.xaml.cs">
       <DependentUpon>Dashboard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\MyFilesPage.xaml.cs">
       <DependentUpon>MyFilesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\NetworkPage.xaml.cs">
+      <DependentUpon>NetworkPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\RecentFilesPages.xaml.cs">
       <DependentUpon>RecentFilesPages.xaml</DependentUpon>
@@ -66,6 +89,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Controls\HeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ItemTemplates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -97,11 +124,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
     <Page Include="$(MSBuildThisFileDirectory)Views\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\MyFilesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\NetworkPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,6 +165,9 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ControlIcons\AnimationsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\ControlImages\AnimatedIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\ethernet-card-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\file.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\file.scale-125.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\file.scale-150.png" />
@@ -140,6 +178,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\folder.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\folder.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Images\folder.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Images\MainPage_Banner.png" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
