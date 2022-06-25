@@ -31,13 +31,13 @@
 				IsReadOnly="True"
 				IsFocusEngaged="False"
 				Text="{Binding CurrentFolderPath}"/>
-			<ProgressRing
+			<!--<ProgressRing
 				Grid.Column="1"
 				android:Width="15" android:Height="15"
 				HorizontalAlignment="Right"
 				Margin="0, 0, 10, 0"
 				IsActive="{Binding IsStatusBarLoading}"
-				Visibility="{Binding IsStatusBarLoading, Converter={StaticResource BoolToVisibilityConverter}}" />
+				Visibility="{Binding IsStatusBarLoading, Converter={StaticResource BoolToVisibilityConverter}}" />-->
 		</Grid>
 		<ScrollViewer Grid.Row="1" Visibility="{Binding IsMainFrameLoading, Converter={StaticResource BoolNegationToVisibilityConverter}}">
 			<StackPanel>
@@ -50,11 +50,11 @@
 					Visibility="{Binding IsPageEmpty, Converter={StaticResource BoolToVisibilityConverter}}"/>
 			</StackPanel>
 		</ScrollViewer>
-		<ProgressRing 
+		<!--<ProgressRing 
 			Grid.Row="1"
 			Width="300" Height="300"
 			IsActive="True"
-			Visibility="{Binding IsMainFrameLoading}" />
+			Visibility="{Binding IsMainFrameLoading}" />-->
 		<StackPanel 
 			Grid.Row="2" 
 			Orientation="Horizontal" 

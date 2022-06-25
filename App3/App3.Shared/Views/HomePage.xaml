@@ -66,20 +66,13 @@
 
             <GridView.Header>
                 <Grid x:Name="HeaderGrid" Margin="12,39,43,0">
-                    <ParallaxView
-                        x:Name="headerImageView"
-                        Height="256"
-                        Source="{x:Bind itemGridView}"
-                        VerticalAlignment="Top">
-                        <Grid CornerRadius="{StaticResource ControlCornerRadius}">
-                            <Image
-                                x:Name="headerImage"
-                                HorizontalAlignment="Center"
-                                Source="ms-appx:///Assets/Images/MainPage_Banner.png"
-                                Stretch="Fill" />
-                        </Grid>
-
-                    </ParallaxView>
+                    <Grid CornerRadius="{StaticResource ControlCornerRadius}">
+                        <Image
+                            x:Name="headerImage"
+                            HorizontalAlignment="Center"
+                            Source="ms-appx:///Assets/Images/MainPage_Banner.png"
+                            Stretch="Fill" />
+                    </Grid>
 
                     <StackPanel Orientation="Vertical" Margin="60,90,0,40">
                         <TextBlock x:Name="smallHeaderText"

@@ -17,7 +17,7 @@
 
     <NavigationView x:Name="menu"
                     IsBackButtonVisible="Collapsed"
-                    IsPaneOpen="False"
+                    IsPaneOpen="True"
                     win:IsPaneToggleButtonVisible="False"
                     wasm:IsPaneToggleButtonVisible="False"
                     win:PaneDisplayMode="Left"
@@ -42,7 +42,11 @@
             <NavigationViewItem Icon="Play" Content="Unused" x:Name="myFiles" />
             <NavigationViewItem Icon="Play" Content="ArtNet" x:Name="protocolArtNet" />
             <NavigationViewItem Icon="Play" Content="sACN" x:Name="protocolSACN" />
-            <NavigationViewItem Icon="List" Content="Network Adapters" x:Name="networkAdapters" />
+            <NavigationViewItem Icon="List" Content="Network Adapters" x:Name="networkAdapters" IsExpanded="True">
+                <NavigationViewItem.MenuItems>
+                    <NavigationViewItem Content="Sub1" />
+                </NavigationViewItem.MenuItems>
+            </NavigationViewItem>
             <NavigationViewItem Icon="Refresh" Content="Shared" x:Name="sharedFiles" />
             <NavigationViewItem Icon="Download" Content="Recycle Bin" x:Name="recycleBin" />
             <NavigationViewItem Icon="ClosePane" Content="Sign Out" x:Name="signOut"  />
@@ -54,11 +58,11 @@
             <NavigationViewItem Icon="Clear" Content="Exit" x:Name="exit" />
         </NavigationView.FooterMenuItems>-->
 
-        <NavigationView.Header>
-            <!--<Frame x:Name="headerFrame" win:Padding="25, 10" wasm:Padding="25, 10" android:Padding="0, 0, 10, 0">
+        <!--<NavigationView.Header>
+            <Frame x:Name="headerFrame" win:Padding="25, 10" wasm:Padding="25, 10" android:Padding="0, 0, 10, 0">
                 <c:HeaderControl />
-            </Frame>-->
-        </NavigationView.Header>
+            </Frame>
+        </NavigationView.Header>-->
 
 		<Frame x:Name="contentFrame" Padding="15, 10" />
 

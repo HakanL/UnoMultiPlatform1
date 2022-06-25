@@ -48,9 +48,9 @@
     <PackageReference Include="Uno.Extensions.Navigation.Toolkit.WinUI" Version="2.0.0" />
     <PackageReference Include="Uno.Extensions.Navigation.WinUI" Version="2.0.0" />
     <PackageReference Include="Uno.Extensions.Reactive.WinUI" Version="2.0.0" />
-    <PackageReference Include="Uno.Material.WinUI" Version="2.1.0" />
+    <PackageReference Include="Uno.Material.WinUI" Version="2.0.0" />
     <PackageReference Include="Uno.Toolkit.WinUI" Version="2.1.0" />
-    <PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.1.0" />
+    <PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.0.0" />
     <PackageReference Include="Uno.WinUI" Version="4.3.8" />
     <PackageReference Include="Uno.WinUI.WebAssembly" Version="4.3.8" />
     <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.3.8" Condition="'$(Configuration)'=='Debug'" />
